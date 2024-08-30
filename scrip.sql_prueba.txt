@@ -1,0 +1,22 @@
+CREATE DATABASE IF NOT EXISTS base_datos_prueba_k2;
+
+-- Seleccionar la base de datos para usar
+USE base_datos_prueba_k2;
+
+CREATE TABLE IF NOT EXISTS Category (
+    id INT AUTO_INCREMENT PRIMARY KEY,  
+    name VARCHAR(255) NOT NULL,         
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,  
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP 
+);
+
+CREATE TABLE IF NOT EXISTS Product (
+    id INT AUTO_INCREMENT PRIMARY KEY,  
+    code VARCHAR(255) NOT NULL UNIQUE,  -- Código del producto (único)
+    name VARCHAR(255) NOT NULL,         -- Nombre del producto
+    category_id INT,                    -- Identificador de la categoría
+    price FLOAT NOT NULL,               -- Precio del producto
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,  
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  
+    FOREIGN KEY (category_id) REFERENCES Category(id)  
+);
